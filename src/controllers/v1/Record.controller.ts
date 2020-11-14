@@ -1,0 +1,43 @@
+import express, {Request, Response} from 'express'
+import {RecordValidator} from '../../validators/Record-validator';
+import {RecordResponseModel} from '../../models/api/response-models/RecordResponse.model';
+import {StatusCodes} from 'http-status-codes';
+import {RecordService} from "../../services/Record.service";
+
+const router = express.Router()
+const recordService = new RecordService();
+
+router.post('/record', async (req: Request, res: Response) => {
+
+    const recordResponseModel = new RecordResponseModel();
+
+    try {
+        const {isValid, errors} = new RecordValidator().findRecordValidator(req.body);
+
+        if (!isValid) {
+            recordResponseModel.notFound(errors);
+            return res.status(StatusCodes.NOT_FOUND).send(recordResponseModel);
+        }
+
+        let records = await recordService.FindRecords(new Date(req.body.startDate), new Date(req.body.endDate), req.body.minCount, req.body.maxCount);
+        let result: any[] = [];
+        if (records !== undefined && records.length > 0) {
+            records.forEach((record: any) => {
+                result.push({
+                    key: record.key,
+                    createdAt: record.createdAt,
+                    totalCount: record.totalCount
+                });
+            });
+            recordResponseModel.records = result;
+        }
+
+    } catch (e) {
+        recordResponseModel.serverError();
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(recordResponseModel);
+    }
+
+    return res.status(StatusCodes.OK).send(recordResponseModel);
+});
+
+export {router as recordControllerV1}
