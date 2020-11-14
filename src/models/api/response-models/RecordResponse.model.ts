@@ -2,7 +2,7 @@ import {BaseResponseModel} from './BaseResponse.model';
 import {StatusEnum} from "../../../utils/Status.enum";
 import {Document} from "mongoose";
 
-export class RecordResponseModel extends BaseResponseModel{
+export class RecordResponseModel extends BaseResponseModel {
     public records: Document[];
 
     constructor() {
