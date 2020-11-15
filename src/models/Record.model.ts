@@ -1,12 +1,11 @@
 import mongoose, {Schema, Model, Document} from 'mongoose'
 
 interface IRecord {
-    _id:{ type: Schema.Types.ObjectId},
+    _id: { type: Schema.Types.ObjectId },
     key: String,
     createdAt: Date,
     counts: [Number],
     value: String
-
 }
 
 interface recordModelInterface extends Model<RecordDoc> {
@@ -51,5 +50,5 @@ recordSchema.statics.build = (attr: IRecord) => {
 
 const Record = mongoose.model<RecordDoc, recordModelInterface>('records', recordSchema);
 
-export { Record }
+export {Record, IRecord}
 
