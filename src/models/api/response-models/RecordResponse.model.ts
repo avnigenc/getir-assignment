@@ -21,9 +21,9 @@ export class RecordResponseModel extends BaseResponseModel {
         this.errors = errors;
     }
 
-    clientError(errors?: string[]) {
-        this.msg = StatusEnum[StatusEnum.CLIENT_ERROR];
-        this.code = StatusEnum.CLIENT_ERROR;
+    validationError(errors?: string[]) {
+        this.msg = StatusEnum[StatusEnum.INVALID_REQUEST];
+        this.code = StatusEnum.INVALID_REQUEST;
         this.errors = errors;
     }
 

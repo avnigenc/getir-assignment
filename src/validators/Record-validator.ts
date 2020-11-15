@@ -1,4 +1,4 @@
-import {RecordRequestModel} from '../models/api/request-models/RecordRequest.model';
+import {FindRecordRequestModel} from '../models/api/request-models/RecordRequest.model';
 
 const DATE_REGEX = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
 
@@ -6,7 +6,7 @@ import {Errors} from "../utils/ErrorMessages";
 
 export class RecordValidator {
 
-    findRecordValidator(recordRequest: RecordRequestModel) {
+    static findRecordValidator(recordRequest: FindRecordRequestModel) {
         const regex = new RegExp(DATE_REGEX);
         const errors = [];
 

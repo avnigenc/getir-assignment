@@ -1,4 +1,4 @@
-export class RecordRequestModel {
+export class FindRecordRequestModel {
     public startDate: Date;
     public endDate: Date;
     public minCount: number;

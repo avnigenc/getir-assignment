@@ -12,10 +12,11 @@ router.post('/record', async (req: Request, res: Response) => {
     const recordResponseModel = new RecordResponseModel();
 
     try {
-        const {isValid, errors} = new RecordValidator().findRecordValidator(req.body);
+        // Validate Request
+        const {isValid, errors} = RecordValidator.findRecordValidator(req.body);
 
         if (!isValid) {
-            recordResponseModel.notFound(errors);
+            recordResponseModel.validationError(errors);
             return res.status(StatusCodes.NOT_FOUND).send(recordResponseModel);
         }
 
