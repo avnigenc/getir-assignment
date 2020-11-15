@@ -88,6 +88,7 @@ NODE_ENV=development
 ```
 
 ```shell
+npm install
 npm run dev
 ```
 
