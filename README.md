@@ -95,5 +95,5 @@ npm run dev
 ## Test
 
 ```shell
-npm test
+npm run test
 ```
