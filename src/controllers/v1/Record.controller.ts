@@ -16,12 +16,14 @@ router.post('/record', async (req: Request, res: Response) => {
         const {isValid, errors} = RecordValidator.findRecordValidator(req.body);
 
         if (!isValid) {
+            // Set errors and return
             recordResponseModel.validationError(errors);
             return res.status(StatusCodes.NOT_FOUND).send(recordResponseModel);
         }
-
+        // Get records from service
         let records = await recordService.FindRecords(new Date(req.body.startDate), new Date(req.body.endDate), req.body.minCount, req.body.maxCount);
         let result: any[] = [];
+        // Check records
         if (records !== undefined && records.length > 0) {
             records.forEach((record: any) => {
                 result.push({
@@ -30,14 +32,16 @@ router.post('/record', async (req: Request, res: Response) => {
                     totalCount: record.totalCount
                 });
             });
+            // Set records to response model
             recordResponseModel.records = result;
         }
 
     } catch (e) {
+        // Set errors and return
         recordResponseModel.serverError();
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(recordResponseModel);
     }
-
+    // Return SUCCESS response with records
     return res.status(StatusCodes.OK).send(recordResponseModel);
 });
 

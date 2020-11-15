@@ -1,3 +1,4 @@
+// Response status
 export enum StatusEnum {
     "SUCCESS" = 0,
     "INVALID_REQUEST" = 1,

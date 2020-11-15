@@ -24,7 +24,7 @@ export const connectDatabase = () => {
     });
 };
 
-export const disconnect = () => {
+export const disconnectDatabase = () => {
     if (!dbConnection) {
         return;
     }
