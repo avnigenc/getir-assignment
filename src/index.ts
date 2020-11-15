@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import * as fs from 'fs';
 import * as path from 'path';
 import rateLimit from 'express-rate-limit'
+import cors from 'cors'
 
 const app = express();
 
@@ -17,8 +18,11 @@ const limiter = rateLimit({
     max: 100 // limit each IP to 100 requests per windowMs
 });
 
-//  Apply to all requests
+// Apply to all requests
 app.use(limiter);
+
+// Setup CORS
+app.use(cors());
 
 // Logger
 app.use(morgan('common', {
